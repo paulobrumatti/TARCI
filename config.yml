@@ -1,0 +1,18 @@
+---
+timeout: 5000 # Tempo máximo de cada requisição
+url:
+  base: 'https://www.uscs.edu.br/'
+  login: 'login'
+  logout: 'logout'
+  dashboard: 'information'
+  restful: 'restful'
+states:
+  - login
+  - dashboard
+  - notas-faltas
+  - aacc
+  - solicitacao
+solicitacoes:
+  Dispensa de Disciplina:
+    inicio: "05/08/2015"
+    termino: "10/12/2105"
