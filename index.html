@@ -1,29 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-	<meta charset="UTF-8">
-	<title>TARSI</title>
-	<script src="config.yml" type="text/yaml" id="tarsiconfig"></script>
-	<script src="js/vendor/jquery-2.min.js"></script>
-	<script src="js/vendor/yaml.min.js"></script>
-	<script src="js/main.js"></script>
-	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <title>TARSI</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<main>
-		<section class="screen-login"></section>
-		<section class="screen-dashboard"></section>
-	</main>
-	<div class="modal-backdrop"></div>
-	<div class="modal">
-		<div class="modal-header">
-			<span class="title"></span>
-			<a href="" class="modal-close">X</a>
-		</div>
-		<div class="modal-body">
-			<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum voluptate temporibus nihil ad commodi velit. Architecto, nam laudantium! Nesciunt porro obcaecati modi natus provident ducimus maxime nostrum quod praesentium fuga.</p>
-		</div>
-	</div>
+  <main>
+    <section class="state-dashboard">
+      <div class="card card-aacc">
+        <span class="card-aacc-horas-realizadas">156</span>
+        <span class="card-aacc-horas-necessarias">180</span>
+        <a>Detalhes</a>
+      </div>
+      <div class="card card-notasefaltas"></div>
+      <div class="card card-solicitacoes">
+        <ul>
+          <li class="card-solicitacoes-sala">Mudança de Sala</li>
+          <li class="card-solicitacoes-periodo">Mudança de Período</li>
+          <li class="card-solicitacoes-curso">Mudança de Curso</li>
+          <li class="card-solicitacoes-disciplina">Dispensa de Disciplina</li>
+        </ul>
+      </div> 
+    </section>
+  </main>
+
+  <script type="text/html" class="template" id="template-modal">
+    <div class="modal-backdrop"></div>
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title"></span>
+        <a href="javascript:void(0)" class="modal-close">X</a>
+      </div>
+      <div class="modal-body">
+        <p class="modal-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum voluptate temporibus nihil ad commodi velit. Architecto, nam laudantium! Nesciunt porro obcaecati modi natus provident ducimus maxime nostrum quod praesentium fuga.</p>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" class="template" id="template-loading">
+    <div class="loading-screen">
+      <img src="img/loading.gif" alt="Carregando...">
+    </div>
+  </script>
+
+  <script type="text/html" class="template" id="template-login">
+    <section class="state-login">
+      <form action="">
+        <input type="text" name="login">
+        <input type="text" name="password">
+        <button type="submit">Entrar</button>
+      </form>
+    </section>
+  </script>
+
+  <script type="text/html" class="template" id="template-dashboard"></script>
+  <script type="text/html" class="template" id="template-notasefaltas"></script>
+  <script type="text/html" class="template" id="template-aacc"></script>
+  <script type="text/html" class="template" id="template-solicitacao"></script>
+  <script type="text/html" class="template" id="template-"></script>
+  <script src="config.yml" type="text/yaml" id="tarsi-config"></script>
+  <script src="js/vendor/jquery-2.min.js"></script>
+  <script src="js/vendor/yaml.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/actions.js"></script>
 </body>
 </html>

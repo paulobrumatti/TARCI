@@ -1,23 +1,40 @@
-var util = TARSI.util = {};
+(function() {
+	var util = TARSI.util = {};
 
-util.find = function find(selector, scope) {
-	if (!scope) scope = document;
-	return document.querySelectorAll(selector);
-};
+	util.find = function find(selector, scope) {
+		if (!scope) scope = document;
+		return document.querySelectorAll(selector);
+	};
 
-util.ajaxTimeout = function ajaxTimeout(url, data, callback, timeout) {
-	var ajaxPromise = TARSI.getJSON(url, data, function() {
-		clearTimeout(ajaxLife);
-		callback.apply(this, arguments);
-	});
+	util.toArray = function toArray(arrayLike) {
+		return Array.prototype.splice.call(arrayLike);
+	};
 
-	var ajaxLife = setTimeout(function() {
-		ajaxPromise.abort();
-	}, timeout);
-};
+	util.ajaxTimeout = function ajaxTimeout(url, data, callback, timeout) {
+		loadingScreen(true);
+		var ajaxPromise = jQuery.getJSON(url, data, function() {
+			loadingScreen(false);
+			clearTimeout(ajaxLife);
+			callback.apply(this, arguments);
+		});
 
-util.getJSON = function getJSON(url, data, callback) {
-	return jQuery.getJSON(url, data, callback);
-};
+		var ajaxLife = setTimeout(function() {
+			loadingScreen(false);
+			ajaxPromise.abort();
+			TARSI.message({
+				message: 'O servidor não está respondendo no momento. Tente novamente.',
+				type: 'warning'
+			});
+		}, timeout);
+	};
 
-util.message
+	var loadingScreenElement = jQuery('.loading-screen');
+
+	util.loadingScreen = function loadingScreen(start) {
+		loadingScreenElement.toggleClass('show-loading-screen', start)
+	};
+
+	util.message = function message(msg, type) {
+
+	};
+}());
