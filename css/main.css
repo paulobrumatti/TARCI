@@ -1,3 +1,43 @@
+/*
+Referência de Cores: https://www.google.com/design/spec/style/color.html#color-color-palette
+
+Cor principal: Deep Orange
+400    #ff7043
+
+50     #fbe9e7
+100    #ffccbc
+200    #ffab91
+300    #ff8a65
+400    #ff7043
+500    #ff5722
+600    #f4511e
+700    #e64a19
+800    #d84315
+900    #bf360c
+A100   #ff9e80
+A200   #ff6e40
+A400   #ff3d00
+A700   #dd2c00
+
+Cor secundária: Blue
+400    #42a5f5
+
+50     #e3f2fd
+100    #bbdefb
+200    #90caf9
+300    #64b5f6
+400    #42a5f5
+500    #2196f3
+600    #1e88e5
+700    #1976d2
+800    #1565c0
+900    #0d47a1
+A100   #82b1ff
+A200   #448aff
+A400   #2979ff
+A700   #2962ff
+*/
+
 * {
 	padding: 0;
 	margin: 0;
@@ -10,15 +50,29 @@ html, body, main, section {
 }
 
 body {
-	padding: 20px 20px;
+	padding: 10px;
 	color: rgba(0, 0, 0, .9);
 }
 
 main {
-	padding: 5px;
+	padding: 10px;
   	border: 1px solid rgba(0, 0, 0, .1);
 	background-color: rgba(0,0,0, .02);
-	overflow: hidden;
+	overflow: auto;
+	overflow-x: hidden;
+	min-height: 450px;
+}
+
+@media only screen and (max-device-width : 900px) {
+	main {	
+		font-size: 0.75em;
+	}
+}
+
+@media only screen and (min-device-width : 900px) {
+	main {	
+		min-width: 800px;
+	}
 }
 
 ul {
@@ -26,19 +80,141 @@ ul {
 }
 
 .card {
-	padding: 5px;
+	position: relative;
+	padding: 10px 20px;
 	background-color: rgba(0,0,0,.03);
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	margin: 10px;
-	width: calc(50% - 20px);
-	display: inline-block;
+	width: 100%;
 }
 
-.card-notasefaltas {
-	height: calc(100% - 20px);
-	float: right;
+.card h2 {
+	text-align: center;
+	opacity: 87%;
+	font-size: 1.5em;
+	margin-bottom: 10px;
 }
 
-.card-aacc, .card-solicitacoes {
-	height: calc(50% - 20px);
+.card-aacc {
+	margin-bottom: 10px;
+	padding-bottom: 45px;
+}
+
+.card-notasefaltas-grafico {
+	height: 150px;
+	width: 100%;
+	background-color: #ff8a65;
+	opacity: .5;
+}
+
+.card-aacc-horas {
+	height: 24px;
+	width: 100%;
+	margin: 0;
+}
+
+.card-aacc-horas li {
+	line-height: 24px;
+	float: left;
+	overflow: hidden;
+	color: white;
+}
+
+.card-aacc-horas-realizadas {
+	background-color: #ff8a65;
+	padding-left: 5px;
+}
+
+.card-aacc-horas-necessarias {
+	background-color: #64b5f6;
+	text-align: right;
+	padding-right: 5px;
+}
+
+@media only screen and (max-device-width : 700px) {
+	.card {
+		width: 100%;
+		margin-bottom: 10px;
+		font-size: 1em;
+	}
+}
+
+@media only screen and (min-device-width : 700px) {
+	.card-notasefaltas {
+		height: 100%;
+	}
+
+	.card-notasefaltas-grafico {
+		height: 40%;
+	}
+
+	.card-aacc, .card-solicitacoes {
+		height: calc(50% - 5px);
+	}
+
+	.dashboard-right-column, .dashboard-left-column {
+		display: inline-block;
+		vertical-align: top;
+		height: 100%;
+
+	}
+	.dashboard-left-column {
+		width: calc(75% - 10px);
+		margin-right: 5px;
+
+	}
+	.dashboard-right-column {
+		width: calc(25% - 5px);
+	}
+
+	.card-aacc-ultimas tbody td {
+		line-height: 25px;
+	}
+}
+
+.card-solicitacoes li {
+	margin-bottom: 1em;
+}
+
+.button {
+	text-decoration: none;
+	padding: 5px 10px;
+	font-weight: bold;
+	background-color: #ff7043;
+	color: white;
+	line-height: 20px;
+}
+
+.button-secundary {
+	background-color: #42a5f5;
+}
+
+.button-floating {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+.table {
+	margin-top: 10px;
+	width: 100%;
+}
+
+.table td:first-child {
+	border-right: 1px solid #90a4ae;
+}
+
+.table thead td {
+	line-height: 25px;
+	font-weight: bold;
+	border-bottom: 1px solid #90a4ae;
+}
+
+.table tbody tr {
+	line-height: 20px;
+}
+
+@media only screen and (max-device-width : 700px) {
+	.button, .table thead td {
+		font-size: 1.2em;
+	}
 }

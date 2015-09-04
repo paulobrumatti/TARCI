@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>TARSI</title>
+  <title>TARCI</title>
   <!--link rel="stylesheet" href="css/normalize.css"-->
   <link rel="stylesheet" href="css/font.css">
   <link rel="stylesheet" href="css/main.css">
@@ -10,24 +10,65 @@
 <body>
   <main>
     <section class="state-dashboard">
-      <div class="card card-notasefaltas">
-        <h2>Notas e Faltas</h2>
+      <div class="dashboard-left-column">
+        <div class="card card-notasefaltas">
+          <h2>Notas e Faltas</h2>
+          <div class="card-notasefaltas-grafico"></div>
+        </div>
       </div>
-      <div class="card card-aacc">
-        <h2>AACC</h2>
-        <span class="card-aacc-horas-realizadas">156</span>
-        <span class="card-aacc-horas-necessarias">180</span>
-        <a>Detalhes</a>
+      <div class="dashboard-right-column">
+        <div class="card card-aacc">
+          <h2>AACC</h2>
+          <ul class="card-aacc-horas">
+            <li class="card-aacc-horas-realizadas" style="width: 86%;" title="156 horas">
+              <span>156h</span>
+            </li>
+            <li class="card-aacc-horas-necessarias" style="width: 14%;" title="180 horas">
+              <span>180h</span>
+            </li>
+          </ul>
+          <table class="table">
+            <thead>
+              <tr>
+                <td>Descrição</td>
+                <td width="20px">Horas</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Os Vingadores</td>
+                <td>5h</td>
+              </tr>
+              <tr>
+                <td>L'Illustre Molliere</td>
+                <td>5h</td>
+              </tr>
+              <tr>
+                <td>Oficina de Marketing</td>
+                <td>15h</td>
+              </tr>
+              <tr>
+                <td>Apresentação TCC</td>
+                <td>15h</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="javascript:void()" class="button button-secundary button-floating">Detalhes</a>
+        </div>
+        <div class="card card-solicitacoes">
+          <h2>Solicitações</h2>
+          <ul>
+            <li class="card-solicitacoes-sala"><a href="javascript:void();" class="button">Mudança de Sala</a></li>
+            <li class="card-solicitacoes-periodo"><a href="javascript:void();" class="button">Mudança de Período</a></li>
+            <li class="card-solicitacoes-curso"><a href="javascript:void();" class="button">Mudança de Curso</a></li>
+            <li class="card-solicitacoes-disciplina"><a href="javascript:void();" class="button">Dispensa de Disciplina</a></li>
+          </ul>
+        </div> 
       </div>
-      <div class="card card-solicitacoes">
-        <h2>Solicitações</h2>
-        <ul>
-          <li class="card-solicitacoes-sala">Mudança de Sala</li>
-          <li class="card-solicitacoes-periodo">Mudança de Período</li>
-          <li class="card-solicitacoes-curso">Mudança de Curso</li>
-          <li class="card-solicitacoes-disciplina">Dispensa de Disciplina</li>
-        </ul>
-      </div> 
     </section>
   </main>
 
