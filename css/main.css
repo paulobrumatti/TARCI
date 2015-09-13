@@ -1,4 +1,5 @@
 /*
+v2
 Referência de Cores: https://www.google.com/design/spec/style/color.html#color-color-palette
 
 Deep Orange       Blue          
@@ -26,26 +27,60 @@ A700   #dd2c00    #2962ff
 	box-sizing: border-box;
 }
 
-html,body,main,section { 
+html, body { 
 	width: 100%;
 	height: 100%;
 }
 
 body {
+	background-color: white;
 	color: rgba(0, 0, 0, .87);
 }
 
+section {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	margin: 10px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: transform 0.5s, opacity 0.75s;
+	transform: scaleY(0);
+	opacity: 0;
+	width: calc(100% - 20px);
+}
+
+@media only screen and (min-width : 700px) {
+	section {
+		height: calc(100% - 20px);
+	}
+}
+
+.login #state-login,
+.dashboard #state-dashboard {
+	transform: scaleY(1);
+	opacity: 1;
+}
+
 main {
-	padding: 10px;
+	position: relative;
+	height: calc(100% - 80px);
 	background-color: rgba(0,0,0, .02);
 	overflow: auto;
 	overflow-x: hidden;
-	min-height: 450px;
 }
 
 @media only screen and (max-width : 899px) {
 	main {	
 		font-size: 0.75em;
+	}
+}
+
+@media only screen and (min-width : 700px) {
+	main {
+		min-height: 450px;
 	}
 }
 
@@ -57,6 +92,60 @@ main {
 
 ul {
 	list-style: none;
+}
+
+.login .header {
+	display: none;
+}
+
+.login main {
+	height: 100%;
+}
+
+.login #state-login {
+	height: calc(100% - 20px);
+	flex-direction: column;
+	justify-content: center;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 80px;
+	padding: 2px 20px;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.header-menu {
+	height: 76px;
+}
+
+.header-logo {
+	align-self: flex-start;
+}
+
+.header-logo img {
+	height: 70px;
+	margin-top: 5px;
+}
+
+.header-menu-logout {
+	align-self: flex-end;
+}
+
+.header-menu-item {
+	color: #1565c0;
+	font-size: 48px;
+	line-height: 80px;
+	min-width: 60px;
+	text-align: center;
+	text-decoration: none;
+}
+
+.header-menu-item:hover {
+	color: #ff3d00;
 }
 
 .card {
@@ -99,17 +188,10 @@ ul {
 	text-align: center;
 }
 
-#state-login {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
-}
-
 .card-login {
 	width: 25%;
 	min-width: 300px;
+	margin: 0 auto;
 }
 
 @media only screen and (max-width : 1199px) {
@@ -123,9 +205,18 @@ ul {
 	margin: 1em 0;
 }
 
-.dashboard-left-column > :first-child,
-.dashboard-right-column > :first-child {
-	margin-bottom: 10px;
+@media only screen and (min-width: 699px) {
+	.card-hoje,
+	.card-notasefaltas {
+		flex: 1 1 calc(75% - 10px);
+		margin-bottom: 10px;
+		margin-right: 10px;
+	}
+
+	.card-aacc,
+	.card-solicitacoes {
+		flex: 1 1 25%;
+	}	
 }
 
 .card-hoje-aula {
@@ -191,22 +282,6 @@ ul {
 		height: 80%;
 	}
 
-	.dashboard-right-column,
-	.dashboard-left-column {
-		display: inline-block;
-		vertical-align: top;
-		height: 100%;
-
-	}
-	.dashboard-left-column {
-		width: calc(75% - 10px);
-		margin-right: 5px;
-
-	}
-	.dashboard-right-column {
-		width: calc(25% - 5px);
-	}
-
 	.card-aacc-ultimas td {
 		line-height: 25px;
 	}
@@ -220,16 +295,17 @@ ul {
  * Botões *
  **********/
 .button {
-	background-color: #ff7043;
-	border: none;
-	color: white;
+	background-color: #FF7043;
+	border: medium none;
+	color: #FFF;
 	font-weight: bold;
 	line-height: 20px;
 	padding: 5px 10px;
 	text-decoration: none;
 	text-overflow: clip ellipsis;
 	white-space: nowrap;
-  	overflow: hidden;
+	overflow: hidden;
+	margin: .5em 0;
 }
 
 .button-secondary {
@@ -237,15 +313,12 @@ ul {
 }
 
 .button-fullwidth {
+	width: 100%;
 	display: block;
 	text-align: center;
 }
 
-@media only screen and (min-width : 699px) {
-	.card {
-		padding-bottom: 45px;
-	}
-
+@media only screen and (min-width : 700px) {
 	.button-floating {
 		position: absolute;
 		bottom: 10px;

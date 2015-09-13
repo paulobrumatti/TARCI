@@ -1,5 +1,5 @@
 (function() {
-	var util = TARSI.util = {};
+	var util = TARCI.util = {};
 
 	util.find = function find(selector, scope) {
 		if (!scope) scope = document;
@@ -11,30 +11,30 @@
 	};
 
 	util.ajaxTimeout = function ajaxTimeout(url, data, callback, timeout) {
-		loadingScreen(true);
+		util.loadingScreen(true);
 		var ajaxPromise = jQuery.getJSON(url, data, function() {
-			loadingScreen(false);
+			util.loadingScreen(false);
 			clearTimeout(ajaxLife);
 			callback.apply(this, arguments);
 		});
 
 		var ajaxLife = setTimeout(function() {
-			loadingScreen(false);
+			util.loadingScreen(false);
 			ajaxPromise.abort();
-			TARSI.message({
-				message: 'O servidor não está respondendo no momento. Tente novamente.',
+			TARCI.util.message({
+				message: 'O servidor não está respondendo no momento. Tente novamente mais tarde.',
 				type: 'warning'
 			});
 		}, timeout);
 	};
 
-	var loadingScreenElement = jQuery('.loading-screen');
+	var loadingScreenElement = jQuery('#loading-screen');
 
-	util.loadingScreen = function loadingScreen(start) {
-		loadingScreenElement.toggleClass('show-loading-screen', start)
+	util.loadingScreen = function loadingScreen(show) {
+		loadingScreenElement.toggleClass('loading-show', show)
 	};
 
-	util.message = function message(msg, type) {
-
+	util.message = function message(obj) {
+		alert(obj.type + '\n\n' + obj.message);
 	};
 }());
