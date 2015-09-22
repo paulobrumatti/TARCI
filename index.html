@@ -6,150 +6,320 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--link rel="stylesheet" href="css/normalize.css"-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="css/font.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+  <!-- <link rel="stylesheet" href="css/font.css"> -->
   <link rel="stylesheet" href="css/loading.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="login">
-  <nav class="header">
-    <a href="javascript:void(0)" class="header-menu-item header-logo" title="Logo USCS">
-      <img src="img/uscs-logo.svg" alt="Universidade de São Caetano do Sul">
-    </a>
-    <a href="javascript:void(0)" class="header-menu-item header-menu-logout material-icons" title="Sair">account_box</a>
-  </nav>
   <main>
+    <nav class="header">
+      <a href="javascript:void(0)" class="header-logo" title="Logo USCS">
+        <img src="img/uscs-logo.svg" alt="Universidade de São Caetano do Sul">
+      </a>
+      <a href="javascript:void(0)" class="header-logout" title="Sair">
+      <span>Logout</span>
+      <i class="material-icons">account_circle</i></a>
+    </nav>
+
     <section class="state" id="state-login">
       <div class="card card-login">
-        <form action="#state-dashboard" method="POST">
-          <img src="img/uscs-logo.svg" alt="Universidade de São Caetano do Sul" width="100%">
-          <label class="card-login-container">
-            <span class="form-placeholder">Matrícula (RA)</span>
-            <input type="text" required name="login" class="form-field" pattern="\d{5,6}(-\d)?" value="55338-8">
-          </label>
-          <label class="card-login-container">
-            <span class="form-placeholder">Senha (CPF)</span>
-            <input type="text" required name="password" class="form-field" value="123">
-          </label>
-          <button type="submit" class="button button-secondary button-fullwidth">Entrar</button>
-        </form>
+        <div class="card-content">
+          <form action="#state-dashboard" method="POST">
+            <img src="img/uscs-logo.svg" class="login-logo" alt="Universidade de São Caetano do Sul">
+            <div class="form-container">
+              <input type="text" required name="login" class="form-field" pattern="\d{5,6}(-\d)?" autofocus autocomplete="false">
+              <label class="form-placeholder" for="login">Matrícula (RA)</label>
+            </div>
+            <div class="form-container">
+              <input type="text" required name="password" class="form-field" autocomplete="false">
+              <label class="form-placeholder" for="password">Senha (CPF)</label>
+            </div>
+            <button type="submit" class="button button-fullwidth">Entrar</button>
+          </form>
+        </div>
       </div>
     </section>
 
 
     <section class="state" id="state-dashboard">
-        <div class="card card-hoje">
-          <h2>Próximas Aulas</h2>
-          <div class="card-hoje-aula card-hoje-aula2">
-            <h3>COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM</h3>
-            <h4>RICARDO RESENTE DE MENDONÇA - 21h10</h4>
-            <table class="table table-centered">
-              <thead>
-                <tr>
-                  <th>P1</th>
-                  <th>P2</th>
-                  <th>P3</th>
-                  <th>Média</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>7.0</td>
-                  <td>8.9</td>
-                  <td>N/C</td>
-                  <td>7.95</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="card-hoje-aula card-hoje-aula1">
-            <h3>INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL</h3>
-            <h4>OSWALDO ORTIZ FERNANDES JUNIOR - 19H20</h4>
-            <table class="table table-centered">
-              <thead>
-                <tr>
-                  <th>P1</th>
-                  <th>P2</th>
-                  <th>P3</th>
-                  <th>Média</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>7.0</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!--div class="card-hoje-aula card-hoje-aulaunica"></div-->
-        </div>
+      <div class="sidebar">
         <div class="card card-aacc">
-          <h2>AACC</h2>
-          <ul class="card-aacc-horas">
-            <li class="card-aacc-horas-realizadas" style="width: 86%;" title="156 horas">
-              <span>156h</span>
-            </li>
-            <li class="card-aacc-horas-necessarias" style="width: 14%;" title="180 horas">
-              <span>180h</span>
-            </li>
-          </ul>
-          <a href="javascript:void()" class="button button-secondary button-fullwidth">Mais informações</a>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Descrição</th>
-                <th width="20px">Horas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Os Vingadores</td>
-                <td>5h</td>
-              </tr>
-              <tr>
-                <td>L''Illustre Molliere</td>
-                <td>5h</td>
-              </tr>
-              <tr>
-                <td>Oficina de Marketing</td>
-                <td>15h</td>
-              </tr>
-              <tr>
-                <td>Apresentação TCC</td>
-                <td>10h</td>
-              </tr>
-              <tr>
-                <td>Outras AACCs</td>
-                <td>121h</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card card-notasefaltas">
-          <h2>Notas e Faltas</h2>
-          <div class="card-notasefaltas-grafico"></div>
+          <span class="card-header">AACC</span>
+          <div class="card-content">
+            <div class="card-aacc-overview">
+              <div class="card-aacc-horas">
+                <span class="card-aacc-horas-realizada">156 horas</span>
+                <span class="card-aacc-horas-necessaria">180</span>
+              </div>
+              <div class="card-aacc-barras">
+                <div class="card-aacc-barras-realizada" style="width: 86%;" title="156 horas"></div>
+                <div class="card-aacc-barras-necessaria" style="width: 14%;" title="180 horas"></div>
+              </div>
+            </div>
+            <table class="table card-aacc-tabela">
+              <thead>
+                <tr>
+                  <th>Atividade</th>
+                  <th>Horas</th>
+                </tr>
+              </thead>
+              <tbody class="card-aacc-tabela-corpo">
+                <tr>
+                  <td>Os Vingadores</td>
+                  <td>5 Horas</td>
+                </tr>
+                <tr>
+                  <td>L''Illustre Molliere</td>
+                  <td>5 Horas</td>
+                </tr>
+                <tr>
+                  <td>Oficina de Marketing</td>
+                  <td>15 Horas</td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="javascript:void()" class="button button-secondary">Detalhes</a>
+          </div>
         </div>
         <div class="card card-solicitacoes">
-          <h2>Auto Atendimento</h2>
-          <ul>
-            <li>
-              <a href="javascript:void();" class="button button-fullwidth">Mudança de Sala</a>
-            </li>
-            <li>
-              <a href="javascript:void();" class="button button-fullwidth">Mudança de Período</a>
-            </li>
-            <li>
-              <a href="javascript:void();" class="button button-fullwidth">Mudança de Curso</a>
-            </li>
-            <li>
-              <a href="javascript:void();" class="button button-fullwidth">Dispensa de Disciplina</a>
-            </li>
-          </ul>
+          <span class="card-header">Auto Atendimento</span>
+          <div class="card-content">
+            <ul class="list-single card-solicitacoes-lista">
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Sala</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Período</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Curso</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Dispensa de Disciplina</a>
+              </li>
+            </ul>
+          </div>
         </div> 
+      </div>
+        <div class="card card-materias">
+          <span class="card-header">Matérias</span>
+          <div class="card-content">
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">OSWALDO ORTIZ FERNANDES JUNIOR - 19H20</p>
+                <p class="card-materias-aula-info-nome">INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>4</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>7.2</div>
+                <div>P2</div>
+                <div>4.0</div>
+                <div>P3</div>
+                <div>8.2</div>
+                <div>Média</div>
+                <div>7,7</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">RICARDO RESENTE DE MENDONÇA - 21h10</p>
+                <p class="card-materias-aula-info-nome">COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>22</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>1.2</div>
+                <div>P2</div>
+                <div>-</div>
+                <div>P3</div>
+                <div>-</div>
+                <div>Média</div>
+                <div>0.6</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">OSWALDO ORTIZ FERNANDES JUNIOR - 19H20</p>
+                <p class="card-materias-aula-info-nome">INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>4</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>7.2</div>
+                <div>P2</div>
+                <div>4.0</div>
+                <div>P3</div>
+                <div>8.2</div>
+                <div>Média</div>
+                <div>7,7</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">RICARDO RESENTE DE MENDONÇA - 21h10</p>
+                <p class="card-materias-aula-info-nome">COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>22</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>1.2</div>
+                <div>P2</div>
+                <div>-</div>
+                <div>P3</div>
+                <div>-</div>
+                <div>Média</div>
+                <div>0.6</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">OSWALDO ORTIZ FERNANDES JUNIOR - 19H20</p>
+                <p class="card-materias-aula-info-nome">INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>4</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>7.2</div>
+                <div>P2</div>
+                <div>4.0</div>
+                <div>P3</div>
+                <div>8.2</div>
+                <div>Média</div>
+                <div>7,7</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">RICARDO RESENTE DE MENDONÇA - 21h10</p>
+                <p class="card-materias-aula-info-nome">COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>22</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>1.2</div>
+                <div>P2</div>
+                <div>-</div>
+                <div>P3</div>
+                <div>-</div>
+                <div>Média</div>
+                <div>0.6</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">OSWALDO ORTIZ FERNANDES JUNIOR - 19H20</p>
+                <p class="card-materias-aula-info-nome">INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>4</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>7.2</div>
+                <div>P2</div>
+                <div>4.0</div>
+                <div>P3</div>
+                <div>8.2</div>
+                <div>Média</div>
+                <div>7,7</div>
+              </div>
+            </div>
+            <div class="card-materias-aula">
+              <div class="card-materias-aula-info">
+                <p class="card-materias-aula-info-professor">RICARDO RESENTE DE MENDONÇA - 21h10</p>
+                <p class="card-materias-aula-info-nome">COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM</p>
+              </div>
+              <div class="card-materias-aula-acompanhamento">
+                <div>Faltas</div>
+                <div>22</div>
+                <div>L. F.</div>
+                <div>20</div>
+                <div>P1</div>
+                <div>1.2</div>
+                <div>P2</div>
+                <div>-</div>
+                <div>P3</div>
+                <div>-</div>
+                <div>Média</div>
+                <div>0.6</div>
+              </div>
+            </div>
+          </div>
+        </div>
     </section>
   </main>
+  <script type="text/html" id="template-aula" class="template">
+    <div class="card-materias-aula">
+      <div class="card-materias-aula-info">
+        <p class="card-materias-aula-info-professor">{{NOME_PROFESSOR}}</p>
+        <p class="card-materias-aula-info-nome">{{NOME_MATERIA}}</p>
+      </div>
+      <div class="card-materias-aula-acompanhamento">
+        <div>Faltas</div>
+        <div>{{NUM_FALTAS}}</div>
+        <div>L. F.</div>
+        <div>{{NUM_LIMITE_FALTAS}}</div>
+        <div>P1</div>
+        <div>{{NOTA_P1}}</div>
+        <div>P2</div>
+        <div>{{NOTA_P2}}</div>
+        <div>P3</div>
+        <div>{{NOTA_P3}}</div>
+        <div>Média</div>
+        <div>{{NOTA_P4}}</div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="template-aacc-lista" class="template">
+    <tr>
+      <td>{{NOME_AACC}}</td>
+      <td>{{HORAS_AACC}} Horas</td>
+    </tr>
+  </script>
+
+  <script type="text/html" id="template-aacc-overview" class="template">
+    <div class="card-aacc-horas">
+      <span class="card-aacc-horas-realizada">{{HORAS_REALIZADAS}} horas</span>
+      <span class="card-aacc-horas-necessaria">{{HORAS_NECESSARIAS}}</span>
+    </div>
+    <div class="card-aacc-barras">
+      <div class="card-aacc-barras-realizada" style="width: {{PORCENTAGEM_REALIZADA}}%;"></div>
+      <div class="card-aacc-barras-necessaria" style="width: {{PORCENTAGEM_NECESSARIA}}%;"></div>
+    </div>
+  </script>
+  
+  <script type="text/html" id="template-solicitacao" class="template">
+    <li class="list-single-item card-solicitacoes-lista-solicitacao">
+      <i class="material-icons">assignment</i>
+      <a href="javascript:void();" id="{{ID_SOLICITACAO}}">{{NOME_SOLICITACAO}}</a>
+    </li>
+  </script>
 
   <script type="text/html" class="template" id="template-modal">
     <div class="modal-backdrop"></div>
@@ -172,17 +342,6 @@
       <span></span>
     </div>
   </div>
-
-  <script type="text/html" class="template" id="template-login">
-
-  </script>
-
-  <script type="text/html" class="template" id="template-dashboard">
-  </script>
-  <script type="text/html" class="template" id="template-notasefaltas"></script>
-  <script type="text/html" class="template" id="template-aacc"></script>
-  <script type="text/html" class="template" id="template-solicitacao"></script>
-  <script type="text/html" class="template" id="template-"></script>
   <script src="config.yml" type="text/yaml" id="TARCI-config"></script>
   <script src="js/vendor/jquery-2.min.js"></script>
   <script src="js/vendor/yaml.min.js"></script>
