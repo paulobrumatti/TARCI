@@ -11,22 +11,26 @@
 		return Array.prototype.splice.call(arrayLike);
 	};
 
-	util.ajaxTimeout = function ajaxTimeout(url, data, callback, timeout) {
+	util.ajaxTimeout = function ajaxTimeout(settings) {
 		util.loadingScreen(true);
-		var ajaxPromise = jQuery.getJSON(url, data, function () {
+		var ajaxPromise = jQuery.getJSON(settings.url, settings.data, function () {
 			util.loadingScreen(false);
 			clearTimeout(ajaxLife);
-			callback.apply(this, arguments);
+			settings.callback.apply(this, arguments);
 		});
 
 		var ajaxLife = setTimeout(function () {
 			util.loadingScreen(false);
 			ajaxPromise.abort();
-			TARCI.util.message({
-				message: 'O servidor não está respondendo no momento. Tente novamente mais tarde.',
-				type: 'warning'
-			});
-		}, timeout);
+			if (typeof timeoutCallback === 'function')
+				settings.timeoutCallback();
+			else
+				TARCI.util.message({
+					CONTEUDO: 'O servidor não está respondendo no momento. Tente novamente mais tarde.',
+					TITULO: 'Falha no servidor',
+					TIPO: 'error'
+				});
+		}, settings.timeout);
 	};
 
 	util.loadingScreen = function loadingScreen(show) {
@@ -34,7 +38,11 @@
 	};
 
 	util.message = function message(obj) {
-		alert(obj.type + '\n\n' + obj.message);
+		var structure = util.template(TARCI.templates.modal, obj);
+		jQuery('body').append(structure);
+		setTimeout(function () {
+			document.body.classList.add('modal');
+		}, 200);
 	};
 
 	util.template = function template(tmpl, obj) {
@@ -89,13 +97,28 @@
 	};
 
 	util.validate.aaccRecentes = {
-		'NOME_AACC': 'string',
-		'HORAS_AACC': 'number'
-	}
+		'NOME': 'string',
+		'HORAS': 'number'
+	};
+
+	util.validate.aaccDetalhes = {
+		'NOME': 'string',
+		'GRUPO': 'string',
+		'HORAS': 'number'
+	};
 
 	util.validate.solicitacoes = {
-		'ID_SOLICITACAO': 'string',
-		'NOME_SOLICITACAO': 'string'
+		'ID': 'string',
+		'NOME': 'string',
+		'DATA_INICIAL': 'string',
+		'DATA_FINAL': 'string'
+	};
+
+	util.validate.solicitacao = {
+		'ID': 'string',
+		'NOME': 'string',
+		'DATA_INICIAL': 'string',
+		'DATA_FINAL': 'string'
 	};
 
 	util.parseData = function parseData(type, data) {
@@ -110,17 +133,15 @@
 	};
 
 	util.parseData.materias = function (data) {
-		if (!data || !data.length)
+		if (!data || typeof data.length !== 'number')
 			throw new Error('[util.parseData.materias] Os dados devem estar contidos em um array: ' + data);
 
-		data.forEach(function(materia) {
+		data.forEach(function (materia) {
 			util.validate('materia', materia);
-			materia.FALTAS = materia.FALTAS === -1 ? '-' : materia.FALTAS;
-			materia.LIMITE_FALTAS = materia.LIMITE_FALTAS === -1 ? '-' : materia.LIMITE_FALTAS;
-			materia.P1 = materia.P1 === -1 ? '-' : materia.P1;
-			materia.P2 = materia.P2 === -1 ? '-' : materia.P2;
-			materia.P3 = materia.P3 === -1 ? '-' : materia.P3;
-			materia.MEDIA = materia.MEDIA === -1 ? '-' : materia.MEDIA;
+			['FALTAS', 'LIMITE_FALTAS', 'P1', 'P2', 'P3', 'MEDIA'].forEach(function (key) {
+				if (materia[key] < 0 || materia[key] > 10)
+					materia[key] = '-';
+			});
 			var structure = util.template(TARCI.templates.materia, materia);
 			jQuery('.card-materias-content').append(structure);
 		});
@@ -138,10 +159,10 @@
 	};
 
 	util.parseData.aaccRecentes = function (data) {
-		if (!data || !data.length)
+		if (!data || typeof data.length !== 'number')
 			throw new Error('[util.parseData.aaccRecentes] Os dados devem estar contidos em um array: ' + data);
-		
-		data.forEach(function(recente){	
+
+		data.splice(0,3).forEach(function (recente) {
 			util.validate('aaccRecentes', recente);
 			var structure = util.template(TARCI.templates.aaccRecentes, recente);
 			jQuery('.card-aacc-recentes-tabela').append(structure);
@@ -149,13 +170,53 @@
 	};
 
 	util.parseData.solicitacoes = function (data) {
-		if (!data || !data.length)
+		if (!data || typeof data.length !== 'number')
 			throw new Error('[util.parseData.solicitacoes] Os dados devem estar contidos em um array: ' + data);
-		
-		data.forEach(function(solicitacao){	
+
+		var count = data.length;
+		data.forEach(function (solicitacao) {
 			util.validate('solicitacoes', solicitacao);
-			var structure = util.template(TARCI.templates.solicitacoes, solicitacao);
-			jQuery('.card-solicitacoes-lista').append(structure);
+
+			['DATA_INICIAL', 'DATA_FINAL'].forEach(function (key) {
+				var split = solicitacao[key].split('/');
+				solicitacao[key] = new Date(split[2], split[1], split[0]);
+			});
+			var today = new Date();
+			if (today > solicitacao.DATA_INICIAL && today < solicitacao.DATA_FINAL) {
+				var structure = util.template(TARCI.templates.solicitacoes, solicitacao);
+				jQuery('.card-solicitacoes-lista').append(structure);
+			} else
+				count -= 1;
 		});
+
+		if (count <= 0) {
+			jQuery('.card-solicitacoes .card-content').html('Não há solicitações disponíveis no momento.');
+		}
+	};
+
+	util.parseData.aaccDetalhes = function (data) {
+		if (!data || typeof data !== 'object')
+			throw new Error('[util.parseData.aaccDetalhes] Os dados devem estar contidos em um objeto: ' + data);
+
+		if (data.length === 0)
+			TARCI.util.message({
+				TITULO: 'Detalhamento de AACCs',
+				TIPO: 'info',
+				CONTEUDO: 'Não há nenhuma AACC registrada em seu nome.'
+			});
+		else {
+			var aaccs = [];
+			data.forEach(function (detalhe) {
+				util.validate('aaccDetalhes', detalhe);
+				var structure = util.template(TARCI.templates.aaccDetalhes, detalhe);
+				aaccs.push(structure);
+			});
+
+			util.message({
+				TITULO: 'Detalhamento de AACC',
+				TIPO: 'info',
+				CONTEUDO: '<table class="table modal-aacc-detalhes"><thead><tr><th>Descrição</th><th>Grupo</th><th>Horas</th></tr></thead><tbody>' + aaccs.join('') + '</tbody></table>'
+			});
+		}
 	};
 }());

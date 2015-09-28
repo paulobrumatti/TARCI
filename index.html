@@ -15,7 +15,7 @@
   <main>
     <nav class="header">
       <a href="javascript:void(0)" class="header-logo" title="Logo USCS">
-        <img src="img/uscs-logo.svg" alt="Universidade de São Caetano do Sul">
+        <img src="img/uscs-logo.png" alt="Universidade de São Caetano do Sul">
       </a>
       <a href="javascript:void(0)" class="header-logout" title="Sair">
       <span>Logout</span>
@@ -44,11 +44,34 @@
 
     <section class="state" id="state-dashboard">
       <div class="sidebar">
+        <div class="card card-solicitacoes">
+          <span class="card-header">Auto Atendimento</span>
+          <div class="card-content">
+            <ul class="list-single card-solicitacoes-lista">
+              <!-- <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Sala</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Período</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Mudança de Curso</a>
+              </li>
+              <li class="list-single-item">
+                <i class="material-icons">assignment</i>
+                <a href="javascript:void();">Dispensa de Disciplina</a>
+              </li> -->
+            </ul>
+          </div>
+        </div> 
         <div class="card card-aacc">
           <span class="card-header">AACC</span>
           <div class="card-content">
             <div class="card-aacc-content">
-<!--               <div class="card-aacc-horas">
+              <!-- <div class="card-aacc-horas">
                 <span class="card-aacc-horas-realizada">156 horas</span>
                 <span class="card-aacc-horas-necessaria">180</span>
               </div>
@@ -79,33 +102,11 @@
                 </tr> -->
               </tbody>
             </table>
-            <a href="javascript:void()" class="button button-secondary">Detalhes</a>
+            <a href="javascript:void()" class="button button-secondary card-aacc-detalhes">Detalhes</a>
           </div>
         </div>
-        <div class="card card-solicitacoes">
-          <span class="card-header">Auto Atendimento</span>
-          <div class="card-content">
-            <ul class="list-single card-solicitacoes-lista">
-              <!-- <li class="list-single-item">
-                <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Sala</a>
-              </li>
-              <li class="list-single-item">
-                <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Período</a>
-              </li>
-              <li class="list-single-item">
-                <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Curso</a>
-              </li>
-              <li class="list-single-item">
-                <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Dispensa de Disciplina</a>
-              </li> -->
-            </ul>
-          </div>
-        </div> 
       </div>
+      <div class="maincontent">
         <div class="card card-materias">
           <span class="card-header">Matérias</span>
           <div class="card-content card-materias-content"><!-- 
@@ -271,6 +272,7 @@
             </div>
            --></div>
         </div>
+      </div>
     </section>
   </main>
   <script type="text/html" id="template-materia" class="template">
@@ -298,8 +300,8 @@
 
   <script type="text/html" id="template-aacc-recentes" class="template">
     <tr>
-      <td>{{NOME_AACC}}</td>
-      <td>{{HORAS_AACC}} Horas</td>
+      <td>{{NOME}}</td>
+      <td>{{HORAS}} Horas</td>
     </tr>
   </script>
 
@@ -317,21 +319,27 @@
   <script type="text/html" id="template-solicitacoes" class="template">
     <li class="list-single-item card-solicitacoes-lista-solicitacao">
       <i class="material-icons">assignment</i>
-      <a href="javascript:void();" id="{{ID_SOLICITACAO}}">{{NOME_SOLICITACAO}}</a>
+      <a href="javascript:void();" id="{{ID}}">{{NOME}}</a>
     </li>
   </script>
 
   <script type="text/html" class="template" id="template-modal">
     <div class="modal-backdrop"></div>
-    <div class="modal">
-      <div class="modal-header">
-        <span class="modal-title"></span>
-        <a href="javascript:void(0)" class="modal-close">X</a>
+    <div class="card modal-container {{TIPO}}">
+      <div class="modal-header card-header">
+        <span class="modal-title">{{TITULO}}</span>
+        <i class="material-icons modal-close">highlight_off</i>
       </div>
-      <div class="modal-body">
-        <p class="modal-message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum voluptate temporibus nihil ad commodi velit. Architecto, nam laudantium! Nesciunt porro obcaecati modi natus provident ducimus maxime nostrum quod praesentium fuga.</p>
-      </div>
+      <div class="modal-body card-content">{{CONTEUDO}}</div>
     </div>
+  </script>
+
+  <script class="template" id="template-aacc-detalhes" type="text/html">
+    <tr>
+      <td>{{NOME}}</td>
+      <td>{{GRUPO}}</td>
+      <td>{{HORAS}} horas</td>
+    </tr>
   </script>
 
   <div id="loading-screen">
@@ -344,7 +352,7 @@
   </div>
   <script src="config.yml" type="text/yaml" id="TARCI-config"></script>
   <script src="js/vendor/jquery-2.min.js"></script>
-  <script src="js/vendor/yaml.min.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/main.js"></script>
   <script src="js/util.js"></script>
   <script src="js/behavior.js"></script>

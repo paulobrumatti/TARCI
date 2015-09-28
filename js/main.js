@@ -1,105 +1,21 @@
-var data = {
-	"MATERIAS": [{
-		"PROFESSOR": "OSWALDO ORTIZ FERNANDES JUNIOR",
-		"MATERIA": "INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL",
-		"FALTAS": 12,
-		"LIMITE_FALTAS": 20,
-		"P1": 5.6,
-		"P2": -1,
-		"P3": -1,
-		"MEDIA": -1
-	}, {
-		"PROFESSOR": "RICARDO RESENTE DE MENDONÇA",
-		"MATERIA": "COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM",
-		"FALTAS": 0,
-		"LIMITE_FALTAS": 0,
-		"P1": 6,
-		"P2": 4,
-		"P3": -1,
-		"MEDIA": 5
-	}, {
-		"PROFESSOR": "OSWALDO ORTIZ FERNANDES JUNIOR",
-		"MATERIA": "INTELIGÊNCIA ARTIFICIAL E COMPUTACIONAL",
-		"FALTAS": 12,
-		"LIMITE_FALTAS": 20,
-		"P1": 5.6,
-		"P2": -1,
-		"P3": -1,
-		"MEDIA": -1
-	}, {
-		"PROFESSOR": "RICARDO RESENTE DE MENDONÇA",
-		"MATERIA": "COMPUTAÇÃO GRÁFICA E PROCESSAMENTO DE IMAGEM",
-		"FALTAS": 0,
-		"LIMITE_FALTAS": 0,
-		"P1": 6,
-		"P2": 4,
-		"P3": -1,
-		"MEDIA": 5
-	}],
-	"AACC": {
-		"RECENTES": [{
-			"NOME_AACC": "Cine USCS",
-			"HORAS_AACC": 15
-		}, {
-			"NOME_AACC": "Os Vingadores",
-			"HORAS_AACC": 4
-		}],
-		"HORAS_REALIZADAS": 19,
-		"HORAS_NECESSARIAS": 190
-	},
-	"SOLICITACOES": [{
-		'ID_SOLICITACAO': 'mudanca-de-sala',
-		'NOME_SOLICITACAO': 'Mudança de Sala'
-	}, {
-		'ID_SOLICITACAO': 'mudanca-de-periodo',
-		'NOME_SOLICITACAO': 'Mudança de Período'
-	}, {
-		'ID_SOLICITACAO': 'mudanca-de-curso',
-		'NOME_SOLICITACAO': 'Mudança de Curso'
-	}, {
-		'ID_SOLICITACAO': 'dispensa-de-disciplina',
-		'NOME_SOLICITACAO': 'Dispensa de Disciplina'
-	}]
-};
-
 (function () {
 	var TARCI = {};
 
 	TARCI.sections = jQuery('.state');
 	TARCI.templates = {
+		'modal': jQuery('#template-modal').html(),
 		'materia': jQuery('#template-materia').html(),
 		'aaccRecentes': jQuery('#template-aacc-recentes').html(),
 		'aaccVisaoGeral': jQuery('#template-aacc-visaogeral').html(),
+		'aaccDetalhes': jQuery('#template-aacc-detalhes').html(),
 		'solicitacoes': jQuery('#template-solicitacoes').html(),
 	};
 	TARCI.init = function init() {
-
-		// TODO - Migrar para config externo em YML
-		TARCI.config = {
-			"timeout": 5000,
-			"url": {
-				"base": "https://www.uscs.edu.br/",
-				"login": "login",
-				"logout": "logout",
-				"dashboard": "information",
-				"restful": "restful"
-			},
-			"states": [
-				"login",
-				"dashboard",
-				"notas-faltas",
-				"aacc",
-				"solicitacao"
-			],
-			"solicitacoes": {
-				"Dispensa de Disciplina": {
-					"data-inicio": "05/08/2015",
-					"data-termino": "10/12/2105"
-				}
-			}
-		};
-
+		// TARCI.util.ajaxTimeout({
+		// 	url: 'https://bruninho-tcc-thiagodp6.c9.io/geturl/?url=http://sheetsu.com/apis/435e2f63'
+		// });
 		toggleSection('login');
+		// TARCI.stateDashboard(data);
 	};
 
 	TARCI.setState = function setState(state, data) {
@@ -118,14 +34,16 @@ var data = {
 		});*/
 		TARCI.util.loadingScreen(true);
 		setTimeout(function () {
-			TARCI.stateDashboard(data);
 			TARCI.util.loadingScreen(false);
-		}, 2000);
+			TARCI.stateDashboard(data);
+		}, 1000);
 	};
 
 	TARCI.stateLogout = function stateLogout() {
 		TARCI.util.loadingScreen(true);
-		document.location.reload();
+		setTimeout(function () {
+			document.location.reload();
+		}, 500);
 	};
 
 	TARCI.stateDashboard = function stateDashboard(data) {
@@ -135,9 +53,36 @@ var data = {
 		TARCI.util.parseData('materias', data.MATERIAS);
 		TARCI.util.parseData('aaccVisaoGeral', data.AACC);
 		TARCI.util.parseData('aaccRecentes', data.AACC.RECENTES);
-		TARCI.util.parseData('solicitacoes', data.SOLICITACOES);
+		// TARCI.util.ajaxTimeout({
+		// 	url: 'https://bruninho-tcc-thiagodp6.c9.io/geturl/?url=http://sheetsu.com/apis/38844672',
+		// 	data: {},
+		// 	callback: function (result) {
+		// 		if (result.status === 200 && result.responseJSON.result) {
+		// 			TARCI.util.parseData('solicitacoes', result.responseJSON.result);
+		// 		} else {
+		// 			jQuery('.card-solicitacoes .card-content').html('Não há solicitações disponíveis no momento.')
+		// 		}
+		// 		toggleSection('dashboard');
+		// 	},
+		// 	timeout: 5000,
+		// 	timeoutCallback: function () {
+		// 		jQuery('.card-solicitacoes .card-content').html('Não há solicitações disponíveis no momento.')
+		// 	}
+		// });
+
+		TARCI.util.parseData('solicitacoes', dataSolicitacoes);
 
 		toggleSection('dashboard');
+	};
+
+	TARCI.stateAACC = function stateAACC(data) {
+		// if (typeof data !== 'object')
+		// 	throw new Error('[TARCI.stateAACC] Dados recebidos incorretos');
+		TARCI.util.parseData('aaccDetalhes', data);
+	};
+
+	TARCI.stateSolicitacao = function stateSolicitacao(data) {
+		TARCI.util.parseData('solicitacao', data);
 	};
 
 	function toggleSection(section) {

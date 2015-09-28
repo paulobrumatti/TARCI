@@ -20,6 +20,13 @@ A200   #ffab40    #536dfe
 A400   #ff9100    #3d5afe
 A700   #ff6d00    #304ffe
 
+Sombras
+2: box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+3: box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+4: box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+6: box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+8: box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+16: box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 */
 
 * {
@@ -75,31 +82,40 @@ main {
 .header-logo img {
   height: 70px;
   margin-top: 5px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+}
+.header-logo:hover img {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .header-logout {
-  transition: color 0.2s;
+  transition: box-shadow 0.2s ease-in-out, color 0.2s;
   color: white;
   line-height: 80px;
   text-decoration: none;
-  border-radius: 50%;
   font-size: 16px;
   display: flex;
   align-items: center;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.12);
 }
 
 .header-logout i {
-  padding-left: 5px;
+  margin-left: 5px;
   font-size: 24px;
+  border-radius: 50%;
 }
 
 .header-logout:hover, .header-logout:hover i {
   color: #ff9100;
+  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
 }
 
 section {
   display: none;
-  padding: 115px 5% 0;
+  padding: 0 5%;
+  margin-top: 115px;
   position: absolute;
   top: -100%;
   left: 100%;
@@ -177,8 +193,13 @@ ul {
 .card {
   border-radius: 2px;
   background-color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s ease-in-out;
   position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 @media only screen and (max-width : 899px) {
@@ -194,7 +215,7 @@ ul {
 .card-header {
   display: block;
   line-height: 85px;
-  padding-left: 16px;
+  padding: 0 16px;
   font-size: 16px;
   background-color: #fb8c00;
   color: white;
@@ -250,12 +271,12 @@ ul {
     width: 25%;
     padding-right: 20px;
   }
-
-  .card-materias {
+  
+  .maincontent {
     width: 75%;
   }
   
-  .card-aacc {
+  .card-solicitacoes {
     margin-bottom: 20px;
   }
 }
@@ -270,7 +291,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 30px 0 5px;
+  padding: 20px 0px 15px;
   border-bottom: 1px solid rgba(0, 0, 0, .37);
 }
 
@@ -330,6 +351,21 @@ ul {
   }
 }
 
+.modal-aacc-detalhes tr :nth-child(1) {
+  text-align: left;
+}
+
+.modal-aacc-detalhes tr :nth-child(2) {
+  text-align: left;
+  width: 100px;
+}
+
+.modal-aacc-detalhes tr :nth-child(3) {
+  text-align: right;
+  width: 100px;
+}
+
+
 /**********
  * Botões *
  **********/
@@ -386,16 +422,17 @@ ul {
 
 .table td,
 .table th {
-  line-height: 36px;
   border-bottom: 1px solid rgba(0, 0, 0, .37);
 }
 
 .table th {
+  line-height: 56px;
   color: rgba(0, 0, 0, .54);
   min-width: 60px;
 }
 
 .table td {
+  line-height: 48px;
   color: rgba(0, 0, 0, .87);
   max-width: 10px;
   white-space: nowrap;
@@ -498,5 +535,78 @@ ul {
 @media only screen and (max-width : 899px) {
   .list-single-item a {
     font-size: 18px;
+  }
+}
+
+.modal-backdrop {
+	background-color: black;
+  opacity: 0;
+  transition: opacity .7s;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.modal .modal-backdrop {
+  opacity: .4;
+}
+
+.modal-container {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  transition: top .5s, opacity .7s;
+  background-color: white;
+  font-size: 16px;
+  top: -30%;
+  left: 2%;
+  width: 96%;
+  opacity: 0;
+  position: fixed;
+  transform: translateY(-50%);
+  transform-style: preserve-3d;
+}
+
+.modal .modal-container {
+	top: 50%;
+	opacity: 1;
+}
+
+.info .modal-header {
+  background-color: #ab47bc;
+}
+
+.error .modal-header {
+  background-color: #d50000;
+}
+
+.modal-header {
+  background-color: #ab47bc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.modal-header i {
+  font-size: 36px;
+}
+
+.modal-body {
+  padding: 30px 16px;
+}
+
+.modal-close {
+  cursor: pointer;
+}
+
+@media only screen and (min-width : 900px) {
+  .modal-container {
+    left: 25%;
+    width: 50%;
   }
 }
