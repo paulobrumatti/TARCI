@@ -266,7 +266,7 @@ ul {
   }
 }
 
-.card-materias-aula {
+.card-materias-materia {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -274,36 +274,36 @@ ul {
   border-bottom: 1px solid rgba(0, 0, 0, .37);
 }
 
-.card-materias-aula:last-child {
+.card-materias-materia:last-child {
   border-bottom: none;  
 }
 
-.card-materias-aula-info {
+.card-materias-materia-info {
   flex: 1 350px;
 }
 
-.card-materias-aula-info-professor {
+.card-materias-materia-info-professor {
   color: rgba(0, 0, 0, .37);
   font-size: 10px;
   padding-bottom: 5px;
 }
 
-.card-materias-aula-info-nome {
+.card-materias-materia-info-nome {
   color: rgba(0, 0, 0, .87);
   font-weight: 700;
   font-size: 12px;
 }
 
-.card-materias-aula-acompanhamento {
+.card-materias-materia-acompanhamento {
   display: flex;
   justify-content: space-between;
 }
 
-.card-materias-aula-acompanhamento div {
+.card-materias-materia-acompanhamento div {
   line-height: 30px;
 }
 
-.card-materias-aula-acompanhamento div:nth-child(2n+1) {
+.card-materias-materia-acompanhamento div:nth-child(2n+1) {
   padding-left: 10px;
   padding-right: 6px;
   text-align: right;
@@ -311,7 +311,7 @@ ul {
   font-size: 16px;
   font-weight: 500;
 }
-.card-materias-aula-acompanhamento div:nth-child(2n) {
+.card-materias-materia-acompanhamento div:nth-child(2n) {
   width: 15px;
   font-size: 10px;
   text-align: left;
@@ -319,12 +319,12 @@ ul {
 }
 
 @media only screen and (max-width : 899px) {
-  .card .card-materias-aula-acompanhamento div {
+  .card .card-materias-materia-acompanhamento div {
     font-size: 12px;
     padding: 0;
   }
   
-  .card-materias-aula-acompanhamento div:nth-child(2n) {
+  .card-materias-materia-acompanhamento div:nth-child(2n) {
     width: 25px;
     padding-left: 5px;
   }
