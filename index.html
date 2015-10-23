@@ -17,6 +17,7 @@
       <a href="javascript:void(0)" class="header-logo" title="Logo USCS">
         <img src="img/uscs-logo.png" alt="Universidade de São Caetano do Sul">
       </a>
+      <span class="header-name">TARCI<span class="header-name-detalhe"> - Terminal de Acesso a Requisições e Consultas a Informações</span></span>
       <a href="javascript:void(0)" class="header-logout" title="Sair">
       <span>Logout</span>
       <i class="material-icons">account_circle</i></a>
@@ -25,14 +26,14 @@
     <section class="state" id="state-login">
       <div class="card card-login">
         <div class="card-content">
-          <form action="#state-dashboard" method="POST">
+          <form method="POST">
             <img src="img/uscs-logo.svg" class="login-logo" alt="Universidade de São Caetano do Sul">
             <div class="form-container">
-              <input type="text" required name="login" class="form-field" pattern="\d{5,6}(-\d)?" autofocus autocomplete="false">
+              <input type="text" required name="login" class="form-field" pattern="\d{4,6}-\d?|\d{5,7}" autofocus autocomplete="false">
               <label class="form-placeholder" for="login">Matrícula (RA)</label>
             </div>
             <div class="form-container">
-              <input type="text" required name="password" class="form-field" autocomplete="false">
+              <input type="text" required name="password" class="form-field" autocomplete="false" pattern="([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})">
               <label class="form-placeholder" for="password">Senha (CPF)</label>
             </div>
             <button type="submit" class="button button-fullwidth">Entrar</button>
@@ -278,67 +279,67 @@
   <script type="text/html" id="template-materia" class="template">
     <div class="card-materias-materia">
       <div class="card-materias-materia-info">
-        <p class="card-materias-materia-info-professor">{{PROFESSOR}}</p>
-        <p class="card-materias-materia-info-nome">{{MATERIA}}</p>
+        <p class="card-materias-materia-info-professor">{{professor}}</p>
+        <p class="card-materias-materia-info-nome">{{materia}}</p>
       </div>
       <div class="card-materias-materia-acompanhamento">
         <div>Faltas</div>
-        <div>{{FALTAS}}</div>
+        <div>{{faltas}}</div>
         <div>L. F.</div>
-        <div>{{LIMITE_FALTAS}}</div>
+        <div>{{limite_faltas}}</div>
         <div>P1</div>
-        <div>{{P1}}</div>
+        <div>{{p1}}</div>
         <div>P2</div>
-        <div>{{P2}}</div>
+        <div>{{p2}}</div>
         <div>P3</div>
-        <div>{{P3}}</div>
+        <div>{{p3}}</div>
         <div>Média</div>
-        <div>{{MEDIA}}</div>
+        <div>{{media}}</div>
       </div>
     </div>
   </script>
 
   <script type="text/html" id="template-aacc-recentes" class="template">
     <tr>
-      <td>{{NOME}}</td>
-      <td>{{HORAS}} Horas</td>
+      <td>{{nome}}</td>
+      <td>{{horas}} Horas</td>
     </tr>
   </script>
 
   <script type="text/html" id="template-aacc-visaogeral" class="template">
     <div class="card-aacc-horas">
-      <span class="card-aacc-horas-realizada">{{HORAS_REALIZADAS}} horas</span>
-      <span class="card-aacc-horas-necessaria">{{HORAS_NECESSARIAS}}</span>
+      <span class="card-aacc-horas-realizada">{{horas_realizadas}} horas</span>
+      <span class="card-aacc-horas-necessaria">{{horas_necessarias}}h</span>
     </div>
     <div class="card-aacc-barras">
-      <div class="card-aacc-barras-realizada" style="width: {{PORCENTAGEM_REALIZADA}}%;"></div>
-      <div class="card-aacc-barras-necessaria" style="width: {{PORCENTAGEM_NECESSARIA}}%;"></div>
+      <div class="card-aacc-barras-realizada" style="width: {{porcentagem_realizada}}%;"></div>
+      <div class="card-aacc-barras-necessaria" style="width: {{porcentagem_necessaria}}%;"></div>
     </div>
   </script>
   
   <script type="text/html" id="template-solicitacoes" class="template">
     <li class="list-single-item card-solicitacoes-lista-solicitacao">
       <i class="material-icons">assignment</i>
-      <a href="javascript:void();" id="{{ID}}">{{NOME}}</a>
+      <a href="javascript:void();" id="{{id}}">{{nome}}</a>
     </li>
   </script>
 
   <script type="text/html" class="template" id="template-modal">
     <div class="modal-backdrop"></div>
-    <div class="card modal-container {{TIPO}}">
+    <div class="card modal-container {{tipo}}">
       <div class="modal-header card-header">
-        <span class="modal-title">{{TITULO}}</span>
+        <span class="modal-title">{{titulo}}</span>
         <i class="material-icons modal-close">highlight_off</i>
       </div>
-      <div class="modal-body card-content">{{CONTEUDO}}</div>
+      <div class="modal-body card-content">{{conteudo}}</div>
     </div>
   </script>
 
   <script class="template" id="template-aacc-detalhes" type="text/html">
     <tr>
-      <td>{{NOME}}</td>
-      <td>{{GRUPO}}</td>
-      <td>{{HORAS}} horas</td>
+      <td>{{nome}}</td>
+      <td>{{grupo}}</td>
+      <td>{{horas}} horas</td>
     </tr>
   </script>
 

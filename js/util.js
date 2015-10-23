@@ -1,6 +1,8 @@
 (function () {
 	var util = TARCI.util = {};
+	var body = jQuery("body");
 	var loadingScreenElement = jQuery('#loading-screen');
+	var loadingScreenQuantity = 0;
 
 	util.find = function find(selector, scope) {
 		if (!scope) scope = document;
@@ -26,22 +28,28 @@
 				settings.timeoutCallback();
 			else
 				TARCI.util.message({
-					CONTEUDO: 'O servidor não está respondendo no momento. Tente novamente mais tarde.',
-					TITULO: 'Falha no servidor',
-					TIPO: 'error'
+					conteudo: 'O servidor não está respondendo no momento. Tente novamente mais tarde.',
+					titulo: 'Falha no servidor',
+					tipo: 'error'
 				});
 		}, settings.timeout);
 	};
 
 	util.loadingScreen = function loadingScreen(show) {
-		loadingScreenElement.toggleClass('loading-show', show)
+		if (show && loadingScreenQuantity === 0)
+			body.toggleClass('loading-show', show);
+
+		loadingScreenQuantity += show ? 1 : -1;
+
+		if (!show && loadingScreenQuantity === 0)
+			body.toggleClass('loading-show', false);
 	};
 
 	util.message = function message(obj) {
 		var structure = util.template(TARCI.templates.modal, obj);
-		jQuery('body').append(structure);
+		body.append(structure);
 		setTimeout(function () {
-			document.body.classList.add('modal');
+			body.addClass('modal');
 		}, 200);
 	};
 
@@ -81,44 +89,37 @@
 	};
 
 	util.validate.materia = {
-		'PROFESSOR': 'string',
-		'MATERIA': 'string',
-		'FALTAS': 'number',
-		'LIMITE_FALTAS': 'number',
-		'P1': 'number',
-		'P2': 'number',
-		'P3': 'number',
-		'MEDIA': 'number'
+		'professor': 'string',
+		'materia': 'string',
+		'faltas': 'number',
+		'limite_faltas': 'number',
+		'p1': 'number',
+		'p2': 'number',
+		'p3': 'number',
+		'media': 'number'
 	};
 
 	util.validate.aaccVisaoGeral = {
-		'HORAS_REALIZADAS': 'number',
-		'HORAS_NECESSARIAS': 'number'
+		'horas_realizadas': 'number',
+		'horas_necessarias': 'number'
 	};
 
 	util.validate.aaccRecentes = {
-		'NOME': 'string',
-		'HORAS': 'number'
+		'nome': 'string',
+		'horas': 'number'
 	};
 
 	util.validate.aaccDetalhes = {
-		'NOME': 'string',
-		'GRUPO': 'string',
-		'HORAS': 'number'
-	};
-
-	util.validate.solicitacoes = {
-		'ID': 'string',
-		'NOME': 'string',
-		'DATA_INICIAL': 'string',
-		'DATA_FINAL': 'string'
+		'nome': 'string',
+		'grupo': 'string',
+		'horas': 'number'
 	};
 
 	util.validate.solicitacao = {
-		'ID': 'string',
-		'NOME': 'string',
-		'DATA_INICIAL': 'string',
-		'DATA_FINAL': 'string'
+		'id': 'string',
+		'nome': 'string',
+		'data_inicial': 'string',
+		'data_final': 'string'
 	};
 
 	util.parseData = function parseData(type, data) {
@@ -138,8 +139,8 @@
 
 		data.forEach(function (materia) {
 			util.validate('materia', materia);
-			['FALTAS', 'LIMITE_FALTAS', 'P1', 'P2', 'P3', 'MEDIA'].forEach(function (key) {
-				if (materia[key] < 0 || materia[key] > 10)
+			['faltas', 'limite_faltas', 'p1', 'p2', 'p3', 'media'].forEach(function (key) {
+				if (materia[key] < 0 || key.indexOf('faltas') === -1 && materia[key] > 10)
 					materia[key] = '-';
 			});
 			var structure = util.template(TARCI.templates.materia, materia);
@@ -152,8 +153,8 @@
 			throw new Error('[util.parseData.aaccVisaoGeral] Os dados devem estar contidos em um objeto: ' + data);
 
 		util.validate('aaccVisaoGeral', data);
-		data.PORCENTAGEM_REALIZADA = 100 * (data.HORAS_REALIZADAS / data.HORAS_NECESSARIAS);
-		data.PORCENTAGEM_NECESSARIA = 100 * (1 - (data.HORAS_REALIZADAS / data.HORAS_NECESSARIAS));
+		data.porcentagem_realizada = 100 * (data.horas_realizadas / data.horas_necessarias);
+		data.porcentagem_necessaria = 100 * (1 - (data.horas_realizadas / data.horas_necessarias));
 		var structure = util.template(TARCI.templates.aaccVisaoGeral, data);
 		jQuery('.card-aacc-content').append(structure);
 	};
@@ -162,7 +163,7 @@
 		if (!data || typeof data.length !== 'number')
 			throw new Error('[util.parseData.aaccRecentes] Os dados devem estar contidos em um array: ' + data);
 
-		data.splice(0,3).forEach(function (recente) {
+		data.splice(0, 3).forEach(function (recente) {
 			util.validate('aaccRecentes', recente);
 			var structure = util.template(TARCI.templates.aaccRecentes, recente);
 			jQuery('.card-aacc-recentes-tabela').append(structure);
@@ -175,16 +176,16 @@
 
 		var count = data.length;
 		data.forEach(function (solicitacao) {
-			util.validate('solicitacoes', solicitacao);
+			util.validate('solicitacao', solicitacao);
 
-			['DATA_INICIAL', 'DATA_FINAL'].forEach(function (key) {
+			['data_inicial', 'data_final'].forEach(function (key) {
 				var split = solicitacao[key].split('/');
 				solicitacao[key] = new Date(split[2], split[1], split[0]);
 			});
 			var today = new Date();
-			if (today > solicitacao.DATA_INICIAL && today < solicitacao.DATA_FINAL) {
+			if (today > solicitacao.data_inicial && today < solicitacao.data_final) {
 				var structure = util.template(TARCI.templates.solicitacoes, solicitacao);
-				jQuery('.card-solicitacoes-lista').append(structure);
+				jQuery(structure).data(solicitacao).appendTo('.card-solicitacoes-lista');
 			} else
 				count -= 1;
 		});
@@ -200,9 +201,9 @@
 
 		if (data.length === 0)
 			TARCI.util.message({
-				TITULO: 'Detalhamento de AACCs',
-				TIPO: 'info',
-				CONTEUDO: 'Não há nenhuma AACC registrada em seu nome.'
+				titulo: 'Detalhamento de AACCs',
+				tipo: 'info',
+				conteudo: 'Não há nenhuma AACC registrada em seu nome.'
 			});
 		else {
 			var aaccs = [];
@@ -213,10 +214,43 @@
 			});
 
 			util.message({
-				TITULO: 'Detalhamento de AACC',
-				TIPO: 'info',
-				CONTEUDO: '<table class="table modal-aacc-detalhes"><thead><tr><th>Descrição</th><th>Grupo</th><th>Horas</th></tr></thead><tbody>' + aaccs.join('') + '</tbody></table>'
+				titulo: 'Detalhamento de AACC',
+				tipo: 'info',
+				conteudo: '<table class="table modal-aacc-detalhes"><thead><tr><th>Descrição</th><th>Grupo</th><th>Horas</th></tr></thead><tbody>' + aaccs.join('') + '</tbody></table>'
 			});
 		}
+	};
+
+	util.parseData.solicitacao = function (data) {
+		if (!data || typeof data !== 'object')
+			throw new Error('[util.parseData.solicitacao] Os dados devem estar contidos em um objeto: ' + data);
+
+		util.validate('solicitacao', data);
+
+		var respostasServidor = respostasServidor2; //dataUsuarios[TARCI.data.user.login].SERVIDOR;
+		
+		var today = new Date();
+		if (today > data.data_inicial && today < data.data_final) {
+			var obj = {
+				id: data.id,
+				nome: data.nome,
+				campos: data.campos.map(function (campo) {
+					return '<select name="' + campo.filtro + '" class="form-field">' + respostasServidor[campo.filtro].opcoes.map(function (opcao) {
+						return '<option value="' + opcao.id + '">' + opcao.label + '</option>';
+					}).join('') + '</select><label class="form-placeholder" for="' + campo.filtro + '">' + campo.nome + '</label>';
+				}).join('')
+			};
+
+			util.message({
+				titulo: data.nome,
+				tipo: 'info',
+				conteudo: util.template(TARCI.templates.lbSolicitacao, obj)
+			});
+		} else util.message({
+			titulo: data.nome,
+			tipo: 'info',
+			conteudo: "A requisição solicitada não está disponível no momento. Por favor, dirija-se ao Atendimento ao Aluno para futuras instruções."
+		});
+
 	};
 }());

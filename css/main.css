@@ -82,11 +82,25 @@ main {
 .header-logo img {
   height: 70px;
   margin-top: 5px;
+  transition: box-shadow 0.2s ease-in-out, color 0.2s;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   border-radius: 50%;
 }
 .header-logo:hover img {
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: none;
+}
+
+.header-name {
+  color: white;
+  font-size: 20px;
+  line-height: 80px;
+  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px rgba(0, 0, 0, 0.2), 0 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+@media only screen and (max-width : 899px) {
+  .header-name-detalhe {
+    display: none;
+  }
 }
 
 .header-logout {
@@ -108,7 +122,7 @@ main {
 
 .header-logout:hover, .header-logout:hover i {
   color: #ff9100;
-  text-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  text-shadow: none;
 
 }
 
@@ -127,13 +141,11 @@ section {
   left: -100%;
 }
 
-@media only screen and (max-width : 899px) {
-  .card {
-    margin-bottom: 10px;
-  }
-}
-
 @media only screen and (min-width : 900px) {
+ .card {
+    margin-bottom: 0;
+  }
+  
   #state-dashboard {
     min-height: 500px;
   }
@@ -196,6 +208,7 @@ ul {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.2s ease-in-out;
   position: relative;
+  margin-bottom: 10px;
 }
 
 .card:hover {
@@ -250,7 +263,7 @@ ul {
   color: #1a237e;
   border-radius: 50%;
   font-size: 7px;
-  transform: translate(-5.5px, -9.5px);
+  transform: translate(-5.5px, -8.5px);
 }
 
 .card-aacc-barras-necessaria {
@@ -329,14 +342,13 @@ ul {
   padding-right: 6px;
   text-align: right;
   white-space: nowrap;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
 }
 .card-materias-materia-acompanhamento div:nth-child(2n) {
-  width: 15px;
-  font-size: 10px;
+  width: 24px;
+  font-size: 16px;
   text-align: left;
-  padding-left: 2px;
 }
 
 @media only screen and (max-width : 899px) {
@@ -420,6 +432,10 @@ ul {
   border-collapse: collapse;
 }
 
+.modal-container .table {
+  margin-top: -30px;
+}
+
 .table td,
 .table th {
   border-bottom: 1px solid rgba(0, 0, 0, .37);
@@ -486,10 +502,27 @@ ul {
   transition: 0.5s;
 }
 
+select.form-field + .form-placeholder,
 .form-field.invalid + .form-placeholder,
 .form-field:valid + .form-placeholder,
 .form-field:focus + .form-placeholder {
-  transform: translate(-1.3em, -1.3em) scale(.9, .9);
+  transform: translate(-1.6rem, -1rem) scale(.9, .9);
+}
+
+@media only screen and (min-width: 900px) {
+  select.form-field + .form-placeholder,
+  .form-field.invalid + .form-placeholder,
+  .form-field:valid + .form-placeholder,
+  .form-field:focus + .form-placeholder {
+    transform: translate(-1.2rem, -1rem) scale(.9, .9);
+  }
+  
+  .modal-container select.form-field + .form-placeholder,
+  .modal-container .form-field.invalid + .form-placeholder,
+  .modal-container .form-field:valid + .form-placeholder,
+  .modal-container .form-field:focus + .form-placeholder {
+    transform: translate(-2.5rem, -1rem) scale(.9, .9);
+  }
 }
 
 .form-field.invalid,
@@ -567,9 +600,17 @@ ul {
   transform-style: preserve-3d;
 }
 
+.modal-content form {
+	margin-bottom: -20px;
+}
+
 .modal .modal-container {
 	top: 50%;
 	opacity: 1;
+}
+
+.success .modal-header {
+  background-color: #4caf50;
 }
 
 .info .modal-header {
@@ -598,6 +639,14 @@ ul {
 
 .modal-body {
   padding: 30px 16px;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+@media only screen and (min-height: 700px) {
+  .modal-body {
+    max-height: 600px;
+  }
 }
 
 .modal-close {
