@@ -14,11 +14,11 @@
 <body class="login">
   <main>
     <nav class="header">
-      <a href="javascript:void(0)" class="header-logo" title="Logo USCS">
+      <a href="http://www.uscs.edu.br/" class="header-logo" title="Universidade Municipal de São Caetano do Sul">
         <img src="img/uscs-logo.png" alt="Universidade de São Caetano do Sul">
       </a>
       <span class="header-name">TARCI<span class="header-name-detalhe"> - Terminal de Acesso a Requisições e Consultas a Informações</span></span>
-      <a href="javascript:void(0)" class="header-logout" title="Sair">
+      <a href="#" class="header-logout" title="Sair">
       <span>Logout</span>
       <i class="material-icons">account_circle</i></a>
     </nav>
@@ -27,7 +27,9 @@
       <div class="card card-login">
         <div class="card-content">
           <form method="POST">
-            <img src="img/uscs-logo.svg" class="login-logo" alt="Universidade de São Caetano do Sul">
+            <a href="http://www.uscs.edu.br/" title="Universidade Municipal de São Caetano do Sul">
+              <img src="img/uscs-logo.svg" class="login-logo" alt="Universidade de São Caetano do Sul">
+            </a>
             <div class="form-container">
               <input type="text" required name="login" class="form-field" pattern="\d{4,6}-\d?|\d{5,7}" autofocus autocomplete="false">
               <label class="form-placeholder" for="login">Matrícula (RA)</label>
@@ -51,19 +53,19 @@
             <ul class="list-single card-solicitacoes-lista">
               <!-- <li class="list-single-item">
                 <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Sala</a>
+                <a href="#">Mudança de Sala</a>
               </li>
               <li class="list-single-item">
                 <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Período</a>
+                <a href="#">Mudança de Período</a>
               </li>
               <li class="list-single-item">
                 <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Mudança de Curso</a>
+                <a href="#">Mudança de Curso</a>
               </li>
               <li class="list-single-item">
                 <i class="material-icons">assignment</i>
-                <a href="javascript:void();">Dispensa de Disciplina</a>
+                <a href="#">Dispensa de Disciplina</a>
               </li> -->
             </ul>
           </div>
@@ -103,7 +105,7 @@
                 </tr> -->
               </tbody>
             </table>
-            <a href="javascript:void()" class="button button-secondary card-aacc-detalhes">Detalhes</a>
+            <a href="#" class="button button-secondary card-aacc-detalhes">Detalhes</a>
           </div>
         </div>
       </div>
@@ -320,7 +322,7 @@
   <script type="text/html" id="template-solicitacoes" class="template">
     <li class="list-single-item card-solicitacoes-lista-solicitacao">
       <i class="material-icons">assignment</i>
-      <a href="javascript:void();" id="{{id}}">{{nome}}</a>
+      <a href="#" id="{{id}}">{{nome}}</a>
     </li>
   </script>
 

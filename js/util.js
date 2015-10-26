@@ -22,6 +22,13 @@
 			var response = false;
 			switch (settings.url) {
 			case 'login':
+				if (settings.data.login === '123123')
+					return util.message({
+						titulo: 'Falha na Conexão',
+						tipo: 'error',
+						conteudo: 'O servidor não está respondendo no momento. Tente novamente mais tarde.'
+					});
+
 				var user = dataUsuarios.filter(function (user) {
 					return user.matricula === settings.data.login;
 				})[0];
