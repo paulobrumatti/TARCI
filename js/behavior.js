@@ -3,11 +3,9 @@
 
 	jQuery('#state-login form').on('submit', function (e) {
 		e.preventDefault();
-		var login = this.login.value.replace(/[^\d]/g, '');
-		var password = this.password.value.replace(/[^\d]/g, '');
 		TARCI.setState('Login', {
-			login: login,
-			password: password
+			login: this.login.value.replace(/[^\d]/g, ''),
+			password: this.password.value.replace(/[^\d]/g, '')
 		});
 	});
 
@@ -30,7 +28,7 @@
 
 	jQuery('.card-aacc-detalhes').on('click', function (e) {
 		e.preventDefault();
-		TARCI.setState('AACC', dataAACC);
+		TARCI.setState('DetalhesAACC');
 	});
 
 	jQuery('.card-solicitacoes-lista').on('click', 'a', function (e) {
@@ -40,19 +38,7 @@
 
 	jQuery('body').on('submit', '.lbSolicitacao', function (e) {
 		e.preventDefault();
-		TARCI.util.loadingScreen(true);
-		var obj = {
-			id: jQuery(this).data('id'),
-			nome: jQuery(this).data('nome'),
-			campos: jQuery(this).find('input, select').toArray().map(function (el) {
-				return {
-					campo: el.name,
-					valor: el.value
-				};
-			})
-		};
+		TARCI.enviarSolicitacao(this);
 		jQuery('.modal-close').click();
-
-		TARCI.enviarSolicitacao(obj);
-	})
+	});
 }(window.TARCI))
