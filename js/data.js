@@ -117,7 +117,7 @@ var data1 = {
 };
 
 var data2 = {
-	"MATERIAS": [{
+	"materias": [{
 		"professor": "DENISE SCTOLO",
 		"materia": "ADMINISTRAÇÃO III",
 		"faltas": 2,
@@ -191,8 +191,8 @@ var data2 = {
 		"media": -1
 	}],
 	"aacc": {
-		"horas_REALIZADAS": 74,
-		"horas_NECESSARIAS": 116
+		"horas_realizadas": 74,
+		"horas_necessarias": 116
 	},
 	"aaccRecentes": [{
 		"nome": "Os Vingadores",

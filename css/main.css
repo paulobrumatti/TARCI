@@ -129,8 +129,8 @@ main {
 section {
   display: none;
   padding: 0 5%;
-  margin-top: 115px;
   position: absolute;
+  margin-top: 115px;
   top: -100%;
   left: 100%;
   transition: left 0.5s, opacity 0.75s;
@@ -139,9 +139,14 @@ section {
 
 #state-login {
   left: -100%;
+  margin-top: 20px;
 }
 
 @media only screen and (min-width : 900px) {
+  #state-login {
+    margin-top: 115px;
+  }
+
  .card {
     margin-bottom: 0;
   }
@@ -405,6 +410,14 @@ ul {
   color: #304ffe;
 }
 
+.button-alternate {
+  background-color: #ff6d00;
+}
+
+.button-alternate:hover {
+  background-color: #ff9100;
+}
+
 .button.button-fullwidth {
   width: 100%;
   display: block;
@@ -658,4 +671,32 @@ select.form-field + .form-placeholder,
     left: 25%;
     width: 50%;
   }
+}
+
+.fab {
+  cursor: pointer;
+  text-transform: lowercase;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 40px;
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  right: 30px;
+  bottom: 10px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and ( min-width: 900px ) {
+  .fab {
+    width: 50px;
+    height: 50px;
+    right: 30px;
+    bottom: 10px;
+  }
+}
+
+.fab:hover {
+  box-shadow: none;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
